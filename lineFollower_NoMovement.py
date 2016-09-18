@@ -23,12 +23,8 @@ while(True):
     # Color thresholding
     ret,thresh = cv2.threshold(blur,60,255,cv2.THRESH_BINARY_INV)
 
-    # Erode and dilate to remove accidental line detections
-    erode = cv2.erode(thresh, None, iterations=2)
-    dilate = cv2.dilate(erode, None, iterations=2)
-
     # Find the contours of the frame
-    contours,hierarchy = cv2.findContours(dilate.copy(), 1, cv2.CHAIN_APPROX_NONE)
+    contours,hierarchy = cv2.findContours(thresh.copy(), 1, cv2.CHAIN_APPROX_NONE)
 
     # Find the biggest contour (if detected)
     if len(contours) > 0:
